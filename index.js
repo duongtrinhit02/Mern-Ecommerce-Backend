@@ -15,11 +15,21 @@ const app = express();
 
 app.use('/api/payment/webhook', express.raw({ type: 'application/json' }));
 
-// CORS
 app.use(cors({
-  origin: "http://localhost:5173", 
-  credentials: true,               
+  origin: function(origin, callback){
+    if(!origin) return callback(null, true); // allow curl, mobile apps
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "https://mern-ecommerce-frontend-git-main-duongtrinhit02s-projects.vercel.app"
+    ];
+    if(allowedOrigins.indexOf(origin) === -1){
+      return callback(new Error("Not allowed by CORS"), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
 }));
+
 
 app.use(express.json());
 
