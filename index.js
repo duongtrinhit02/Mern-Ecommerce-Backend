@@ -13,13 +13,13 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
- origin: [
-  "http://localhost:5173",
-  "https://mern-ecommerce-frontend-six-phi.vercel.app" // ✅ phải có https://
-],
-
-  credentials: true // nếu cần gửi cookie / auth
+app.options("*", cors({
+  origin: [
+    "http://localhost:5173",
+    "https://mern-ecommerce-frontend-six-phi.vercel.app",
+    "https://mern-ecommerce-frontend-dusky-beta.vercel.app"
+  ],
+  credentials: true
 }));
 
 app.use(express.json());
