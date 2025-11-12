@@ -14,10 +14,11 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: [
-    "http://localhost:5173", // local dev frontend
-    "https://mern-ecommerce-frontend-git-main-duongtrinhit02s-projects.vercel.app" // frontend deploy
-  ],
+ origin: [
+  "http://localhost:5173",
+  "https://mern-ecommerce-frontend-six-phi.vercel.app" // ✅ phải có https://
+],
+
   credentials: true // nếu cần gửi cookie / auth
 }));
 
