@@ -46,10 +46,23 @@ export const getProductById = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    const product = new Product(req.body);
+    // req.body.images phải là mảng URL
+    const { name, description, price, images, category, countInStock, isFeatured } = req.body;
+
+    const product = new Product({
+      name,
+      description,
+      price,
+      images,           // lưu mảng ảnh
+      category,
+      countInStock,
+      isFeatured,
+    });
+
     await product.save();
     res.status(201).json(product);
   } catch (err) {
+    console.error(err);
     res.status(400).json({ msg: 'Invalid data' });
   }
 };
